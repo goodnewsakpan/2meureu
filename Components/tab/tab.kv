@@ -1,0 +1,35 @@
+<TabsBar>:
+    size_hint_y: None
+    height: tab_item_container.height
+    do_scroll_y: False
+    bar_width: 0
+    MDBoxLayout:
+        id: tab_item_container
+        adaptive_size: True
+        padding: root.container_padding
+        spacing: "10dp"
+
+<TabsItem>:
+    adaptive_size: True
+    theme_elevation_level: "Custom"
+    elevation_level: 0
+    theme_bg_color: "Custom"
+    allow_no_selection: False
+    md_bg_color:
+        self.theme_cls.primaryContainerColor \
+        if self.state == "down" \
+        else self.theme_cls.surfaceContainerHighestColor
+    on_md_bg_color:
+        if self.state == "normal": \
+        self.md_bg_color = self.theme_cls.surfaceContainerHighestColor
+        else: self.md_bg_color = self.theme_cls.primaryContainerColor
+
+
+<TabsItemText>:
+    adaptive_size: True
+    role: "small"
+    theme_line_height: "Custom"
+    line_height: 1
+    theme_text_color: "Custom"
+    text_color:
+        self.theme_cls.onSurfaceVariantColor if self.state == "normal" else self.theme_cls.primaryColor
