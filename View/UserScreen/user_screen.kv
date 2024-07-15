@@ -1,0 +1,44 @@
+<UserScreenView>
+    name: 'user screen'
+    MDAnchorLayout:
+        anchor_y: "top"
+        MDBoxLayout:
+            adaptive_height: True
+            padding: "20dp", "40dp", "20dp", "20dp"
+            orientation: "vertical"
+            spacing: "20dp"
+            MDLabel:
+                padding: 0, 0, 0, "20dp"
+                text: "User Detail"
+                font_style: "Headline"
+                adaptive_height: True
+            TextField:
+                id: name
+                radius: "10dp"
+                padding: "10dp"
+                font_size: "16sp"
+                hint_text: "Full name"
+                icon_left: "account"
+            TextField:
+                id: phone_number
+                radius: "10dp"
+                padding: "10dp"
+                font_size: "16sp"
+                hint_text: "Phone number"
+                icon_left: "cellphone"
+                input_filter: "int"
+                input_type: "tel"
+            MDButton:
+                theme_width: "Custom"
+                size_hint_x: 1
+                height: "56dp"
+                radius: self.height / 2
+                on_release:
+                    root.open_dialog()
+                    if len(phone_number.text) == 11: root.controller.submit_user_details(name.text, phone_number.text)
+                    else: root.toast("invalid phone number. Must start with 0")
+                MDButtonText:
+                    text: "Submit"
+                    pos_hint: {"center": [.5, .5]}
+                    font_style: "Title"
+                    role: "medium"
