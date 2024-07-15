@@ -1,0 +1,93 @@
+<SignupScreenView>
+    name: 'signup screen'
+    MDBoxLayout:
+        adaptive_height: True
+        pos_hint: {"center_y": .5}
+        orientation: "vertical"
+        spacing: "10dp"
+        padding: "20dp"
+        MDBoxLayout:
+            adaptive_height: True
+            spacing: "10dp"
+            orientation: "vertical"
+            MDLabel:
+                text: "Join 2meureu"
+                halign: "center"
+                adaptive_height: True
+                theme_line_height: "Custom"
+                line_height: 1
+                font_style: "Headline"
+                role: "small"
+            MDLabel:
+                text: "We will send you verification mail"
+                adaptive_height: True
+                halign: "center"
+                theme_text_color: "Hint"
+                text_color: self.theme_cls.disabledTextColor
+                theme_line_height: "Custom"
+                line_height: 1
+        TextField:
+            id: email
+            radius: "10dp"
+            padding: "10dp"
+            font_size: "16sp"
+            hint_text: "Email"
+            input_type: "mail"
+            icon_left: "email-outline"
+        TextField:
+            id: password
+            radius: "10dp"
+            padding: "10dp"
+            font_size: "16sp"
+            hint_text: "Password"
+            icon_left: "lock-outline"
+            input_type: "null"
+            password: True
+            icon_right: "eye-off"
+            on_icon_right_release:
+                self.password = not self.password
+                self.icon_right = "eye" if self.icon_right == "eye-off" else "eye-off"
+        TextField:
+            id: c_password
+            radius: "10dp"
+            padding: "10dp"
+            font_size: "16sp"
+            hint_text: "Confirm password"
+            icon_left: "lock-outline"
+            icon_right: "eye-off"
+            input_type: "null"
+            password: True
+            on_icon_right_release:
+                self.password = not self.password
+                self.icon_right = "eye" if self.icon_right == "eye-off" else "eye-off"
+        MDButton:
+            theme_width: "Custom"
+            size_hint_x: 1
+            on_release:
+                root.open_dialog()
+                if password.text == c_password.text: root.controller.account_signup(email.text, password.text)
+                else: root.toast("password does not match")
+            MDButtonText:
+                text: "Continue"
+                pos_hint: {"center": [.5, .5]}
+                font_style: "Title"
+                role: "medium"
+        MDLabel:
+            text:
+                "By using our app you agree with our [u]Terms of Use[/u] and [u]Privacy Policy[/u]"
+            theme_line_height: "Custom"
+            line_height: 1
+            adaptive_height: True
+            role: "small"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: self.theme_cls.disabledTextColor
+            markup: True
+        MDButton:
+            style: "text"
+            on_release: root.switch_screen("login screen")
+            MDButtonText:
+                text: "Log in"
+                pos_hint: {"center": [.5, .5]}
+                font_style: "Title"
+                role: "medium"
