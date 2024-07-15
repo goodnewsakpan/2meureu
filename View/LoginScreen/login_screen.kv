@@ -1,0 +1,80 @@
+<LoginScreenView>
+    name: 'login screen'
+    MDBoxLayout:
+        adaptive_height: True
+        pos_hint: {"center_y": .5}
+        orientation: "vertical"
+        spacing: "10dp"
+        padding: "20dp"
+        MDBoxLayout:
+            adaptive_height: True
+            spacing: "10dp"
+            orientation: "vertical"
+            MDLabel:
+                text: "Login 2meureu"
+                halign: "center"
+                adaptive_height: True
+                theme_line_height: "Custom"
+                line_height: 1
+                padding: 0, 0, 0, "20dp"
+                font_style: "Headline"
+                role: "small"
+            MDLabel:
+                text: "Welcome back"
+                adaptive_height: True
+                halign: "center"
+                theme_text_color: "Hint"
+                text_color: self.theme_cls.disabledTextColor
+                theme_line_height: "Custom"
+                line_height: 1
+        TextField:
+            id: email
+            icon_left: "email-outline"
+            radius: "10dp"
+            padding: "10dp"
+            font_size: "16sp"
+            hint_text: "Email"
+            input_type: "mail"
+        TextField:
+            id: password
+            radius: "10dp"
+            padding: "10dp"
+            font_size: "16sp"
+            hint_text: "Password"
+            icon_left: "lock-outline"
+            icon_right: "eye-off"
+            input_type: "null"
+            password: True
+            on_icon_right_release:
+                self.password = not self.password
+                self.icon_right = "eye" if self.icon_right == "eye-off" else "eye-off"
+        MDButton:
+            theme_width: "Custom"
+            size_hint_x: 1
+            on_release:
+                root.open_dialog()
+                root.controller.account_login(email.text, password.text)
+            MDButtonText:
+                text: "Continue"
+                pos_hint: {"center": [.5, .5]}
+                font_style: "Title"
+                role: "medium"
+        MDLabel:
+            text:
+                "By using our app you agree with our [u]Terms of Use[/u] and [u]Privacy Policy[/u]"
+            theme_line_height: "Custom"
+            line_height: 1
+            adaptive_height: True
+            role: "small"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: self.theme_cls.disabledTextColor
+            markup: True
+        MDButton:
+            style: "text"
+            on_release: root.switch_screen("signup screen")
+            MDButtonText:
+                text: "Create account"
+                pos_hint: {"center": [.5, .5]}
+                font_style: "Title"
+                role: "medium"
