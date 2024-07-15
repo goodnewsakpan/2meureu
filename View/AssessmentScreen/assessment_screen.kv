@@ -1,0 +1,55 @@
+<AssessmentScreenView>
+    name: 'assessment screen'
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "20dp"
+        padding: "20dp", "20dp", "20dp", 0
+        MDBoxLayout:
+            spacing: "10dp"
+            adaptive_height: True
+            MDLabel:
+                text: "Assessment"
+                font_style: "Headline"
+                adaptive_height: True
+                theme_line_height: "Custom"
+                line_height: 1
+                pos_hint: {"center_y": .5}
+            MDIconButton:
+                icon: "account-outline"
+                pos_hint: {"center_y": .5}
+        MDCard:
+            id: card
+            data: {}
+            theme_bg_color: "Custom"
+            md_bg_color: self.theme_cls.primaryColor
+            size_hint_y: None
+            height: "150dp"
+            orientation: "vertical"
+            RelativeLayout:
+                LineChart:
+                    labels: False
+                    anim: True
+                    lines: True
+                    x_values: [1, 2, 3, 4, 5, 6]
+                    x_labels: ["20", "21", "22", "23", "24", "25"]
+                    y_values: [100, 300, 100, 390, 350, 500]
+                    bg_color: 0, 0, 0, 0
+                    lines_color: "white"
+                    bars_color: "white"
+                    labels_color: "white"
+                    label_size: dp(12)
+                    line_width: "1dp"
+                    circles_color: "white"
+                MDButton:
+                    pos: "20dp", self.parent.height - dp(20) - self.height
+                    MDButtonIcon:
+                        icon: "trending-up"
+                    MDButtonText:
+                        text: "Explore"
+
+        MDScrollView:
+            bar_width: 0
+            MDList:
+                id: container
+                spacing: "20dp"
+                padding: 0, 0, 0, "100dp"
