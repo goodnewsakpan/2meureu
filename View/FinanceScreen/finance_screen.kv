@@ -1,0 +1,86 @@
+<FinanceScreenView>
+    name: 'finance screen'
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "20dp"
+        padding: "20dp", "20dp", "20dp", 0
+        MDBoxLayout:
+            spacing: "10dp"
+            adaptive_height: True
+            MDLabel:
+                text: "Finance"
+                font_style: "Headline"
+                adaptive_height: True
+                theme_line_height: "Custom"
+                line_height: 1
+                pos_hint: {"center_y": .5}
+            MDIconButton:
+                icon: "account-outline"
+                pos_hint: {"center_y": .5}
+        MDCard:
+            id: card
+            data: {}
+            theme_bg_color: "Custom"
+            md_bg_color: self.theme_cls.primaryColor
+            adaptive_height: True
+            orientation: "vertical"
+            spacing: "20dp"
+            padding: "20dp"
+            MDAnchorLayout:
+                anchor_y: "top"
+                size_hint_y: None
+                height: box.height
+                MDBoxLayout:
+                    adaptive_height: True
+                    MDBoxLayout:
+                        id: box
+                        adaptive_height: True
+                        orientation: "vertical"
+                        MDLabel:
+                            text: "Important payments" if not card.data else card.data["title"]
+                            adaptive_height: True
+                            theme_line_height: "Custom"
+                            line_height: 1
+                            theme_text_color: "Custom"
+                            text_color: "white"
+                        MDLabel:
+                            text: "₦" + "0" if not card.data else card.data["amount"]
+                            font_style: "Headline"
+                            role: "medium"
+                            adaptive_height: True
+                            theme_line_height: "Custom"
+                            line_height: 1
+                            theme_text_color: "Custom"
+                            text_color: "white"
+                    MDLabel:
+                        text: "5 July, 2024" if not card.data else card.data["date"]
+                        role: "small"
+                        adaptive_size: True
+                        theme_line_height: "Custom"
+                        line_height: 1
+                        theme_text_color: "Custom"
+                        text_color: "white"
+                        pos_hint: {"top": 1}
+            MDButton:
+                on_release: ak.start(root.initiate_payment(card.data))
+                MDButtonIcon:
+                    icon: "plus-circle"
+                MDButtonText:
+                    text: "Make payment"
+        MDBoxLayout:
+            adaptive_height: True
+            MDLabel:
+                text: "Upcoming payments"
+                adaptive_height: True
+                pos_hint: {"center_y": .5}
+            MDButton:
+                style: "text"
+                MDButtonText:
+                    text: "See more"
+
+        MDScrollView:
+            bar_width: 0
+            MDList:
+                id: container
+                spacing: "20dp"
+                padding: 0, 0, 0, "100dp"
